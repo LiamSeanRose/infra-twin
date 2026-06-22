@@ -1,0 +1,31 @@
+{
+  "eventName": "AuthorizeSecurityGroupIngress",
+  "eventID": "evt-auth-sg-001",
+  "eventTime": "2024-03-10T18:00:00Z",
+  "eventSource": "ec2.amazonaws.com",
+  "awsRegion": "us-east-1",
+  "requestParameters": {
+    "groupId": "sg-0target",
+    "ipPermissions": {
+      "items": [
+        {
+          "ipProtocol": "tcp",
+          "fromPort": 443,
+          "toPort": 443,
+          "groups": {
+            "items": [
+              {
+                "groupId": "sg-0source",
+                "userId": "123456789012"
+              }
+            ]
+          },
+          "ipRanges": {}
+        }
+      ]
+    }
+  },
+  "responseElements": {
+    "return": true
+  }
+}

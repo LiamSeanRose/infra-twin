@@ -1,0 +1,45 @@
+# Version control
+.git
+.gitignore
+
+# Virtual environments (built inside the container, not from host)
+.venv
+**/.venv
+
+# Node / web frontend (not a uv member; excluded from COPY in Dockerfile too)
+apps/web/node_modules
+apps/web/dist
+apps/web/.cache
+
+# Python byte-code and caches
+__pycache__
+**/__pycache__
+*.pyc
+*.pyo
+.pytest_cache
+**/.pytest_cache
+.ruff_cache
+**/.ruff_cache
+*.egg-info
+**/*.egg-info
+
+# Environment / secrets files (never bake into an image layer)
+.env
+.env.*
+.env*
+
+# Editor / OS artefacts
+.DS_Store
+*.swp
+*.swo
+.idea
+.vscode
+
+# Local dev / run artefacts
+runs/
+docs/
+infra/
+
+# Build output not needed in the image context
+dist/
+build/

@@ -1,0 +1,30 @@
+{
+  "eventName": "AuthorizeSecurityGroupIngress",
+  "eventID": "evt-auth-cidr-001",
+  "eventTime": "2024-03-10T18:30:00Z",
+  "eventSource": "ec2.amazonaws.com",
+  "awsRegion": "us-east-1",
+  "requestParameters": {
+    "groupId": "sg-0target",
+    "ipPermissions": {
+      "items": [
+        {
+          "ipProtocol": "tcp",
+          "fromPort": 443,
+          "toPort": 443,
+          "groups": {},
+          "ipRanges": {
+            "items": [
+              {
+                "cidrIp": "10.0.0.0/8"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "responseElements": {
+    "return": true
+  }
+}

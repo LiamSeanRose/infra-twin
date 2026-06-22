@@ -1,0 +1,11 @@
+# Terraform state files — never commit real state
+*.tfstate
+*.tfstate.*
+
+# Terraform local working directory
+.terraform/
+.terraform.lock.hcl
+
+# Real tfvars files carry secrets; only *.tfvars.example is allowed in VCS
+*.tfvars
+!*.tfvars.example

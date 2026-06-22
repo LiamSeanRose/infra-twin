@@ -1,0 +1,45 @@
+[project]
+name = "infra-twin"
+version = "0.1.0"
+description = "Agentless, read-only infrastructure discovery and graph platform."
+requires-python = ">=3.12"
+dependencies = [
+    "infra-twin-core-model",
+    "infra-twin-db",
+    "infra-twin-connector-sdk",
+    "infra-twin-collectors",
+    "infra-twin-reconciliation",
+    "infra-twin-query",
+    "infra-twin-cli",
+    "infra-twin-api",
+    "infra-twin-onboarding",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = ["packages/*", "services/*", "apps/*"]
+exclude = ["apps/web"]
+
+[tool.uv.sources]
+infra-twin-core-model = { workspace = true }
+infra-twin-db = { workspace = true }
+infra-twin-connector-sdk = { workspace = true }
+infra-twin-collectors = { workspace = true }
+infra-twin-reconciliation = { workspace = true }
+infra-twin-query = { workspace = true }
+infra-twin-cli = { workspace = true }
+infra-twin-api = { workspace = true }
+infra-twin-onboarding = { workspace = true }
+
+[dependency-groups]
+dev = [
+    "pytest>=8.2",
+    "moto[all]>=5.0",
+    "httpx>=0.27",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

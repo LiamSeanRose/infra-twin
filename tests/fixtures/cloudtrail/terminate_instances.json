@@ -1,0 +1,33 @@
+{
+  "eventName": "TerminateInstances",
+  "eventID": "evt-term-001",
+  "eventTime": "2024-03-10T16:00:00Z",
+  "eventSource": "ec2.amazonaws.com",
+  "awsRegion": "us-east-1",
+  "requestParameters": {
+    "instancesSet": {
+      "items": [
+        {
+          "instanceId": "i-0abc123def456"
+        }
+      ]
+    }
+  },
+  "responseElements": {
+    "instancesSet": {
+      "items": [
+        {
+          "instanceId": "i-0abc123def456",
+          "currentState": {
+            "code": 32,
+            "name": "shutting-down"
+          },
+          "previousState": {
+            "code": 16,
+            "name": "running"
+          }
+        }
+      ]
+    }
+  }
+}

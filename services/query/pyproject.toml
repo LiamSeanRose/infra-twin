@@ -1,0 +1,20 @@
+[project]
+name = "infra-twin-query"
+version = "0.1.0"
+description = "Read-side query algorithms: blast-radius traversal and the change feed."
+requires-python = ">=3.12"
+dependencies = [
+    "infra-twin-core-model",
+    "infra-twin-db",
+]
+
+[tool.uv.sources]
+infra-twin-core-model = { workspace = true }
+infra-twin-db = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/infra_twin"]

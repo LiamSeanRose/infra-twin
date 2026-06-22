@@ -1,0 +1,12 @@
+{
+  "eventName": "DescribeInstances",
+  "eventID": "evt-describe-001",
+  "eventTime": "2024-03-10T20:00:00Z",
+  "eventSource": "ec2.amazonaws.com",
+  "awsRegion": "us-east-1",
+  "requestParameters": {
+    "filterSet": {},
+    "instancesSet": {}
+  },
+  "responseElements": null
+}

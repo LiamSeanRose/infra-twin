@@ -1,0 +1,16 @@
+{
+  "eventName": "CreateSecurityGroup",
+  "eventID": "evt-csg-001",
+  "eventTime": "2024-03-10T17:00:00Z",
+  "eventSource": "ec2.amazonaws.com",
+  "awsRegion": "us-east-1",
+  "requestParameters": {
+    "groupName": "my-web-sg",
+    "groupDescription": "Web tier security group",
+    "vpcId": "vpc-0bbb2222"
+  },
+  "responseElements": {
+    "groupId": "sg-0newgroup",
+    "return": true
+  }
+}

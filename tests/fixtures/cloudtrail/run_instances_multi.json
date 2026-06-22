@@ -1,0 +1,54 @@
+{
+  "eventName": "RunInstances",
+  "eventID": "evt-run-multi-001",
+  "eventTime": "2024-03-10T15:00:00Z",
+  "eventSource": "ec2.amazonaws.com",
+  "awsRegion": "us-east-1",
+  "requestParameters": {
+    "instanceType": "t3.small",
+    "minCount": 2,
+    "maxCount": 2
+  },
+  "responseElements": {
+    "instancesSet": {
+      "items": [
+        {
+          "instanceId": "i-0multi001",
+          "instanceType": "t3.small",
+          "subnetId": "subnet-0multi",
+          "vpcId": "vpc-0multi",
+          "currentState": {
+            "code": 0,
+            "name": "pending"
+          },
+          "groupSet": {
+            "items": [
+              {
+                "groupId": "sg-0multi001",
+                "groupName": "web"
+              }
+            ]
+          }
+        },
+        {
+          "instanceId": "i-0multi002",
+          "instanceType": "t3.small",
+          "subnetId": "subnet-0multi",
+          "vpcId": "vpc-0multi",
+          "currentState": {
+            "code": 0,
+            "name": "pending"
+          },
+          "groupSet": {
+            "items": [
+              {
+                "groupId": "sg-0multi001",
+                "groupName": "web"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

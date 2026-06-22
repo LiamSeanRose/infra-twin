@@ -1,0 +1,106 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  Least-privilege read-only IAM role for infra-twin agentless discovery.
+  Deploy this in the customer AWS account, then register the resulting role ARN
+  with your infra-twin tenant.
+
+Parameters:
+  TrusterAccountId:
+    Type: String
+    Description: AWS account ID of the infra-twin service that will assume this role.
+
+  TrusterRoleArn:
+    Type: String
+    Default: ""
+    Description: >
+      Optional: a specific infra-twin role ARN to use as the trust principal.
+      When non-empty, takes precedence over TrusterAccountId (:root form).
+
+  ExternalId:
+    Type: String
+    Description: >
+      Per-tenant external ID to bind to the trust policy (sts:ExternalId condition).
+      Obtain this value from your infra-twin tenant configuration.
+
+  RoleName:
+    Type: String
+    Default: InfraTwinReadOnlyRole
+    Description: Name of the IAM role created in this account.
+
+  Path:
+    Type: String
+    Default: /
+    Description: IAM path for the role.
+
+Conditions:
+  UseTrusterRoleArn:
+    Fn::Not:
+      - Fn::Equals:
+          - Ref: TrusterRoleArn
+          - ""
+
+Resources:
+  InfraTwinReadOnlyRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName:
+        Ref: RoleName
+      Path:
+        Ref: Path
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action: sts:AssumeRole
+            Principal:
+              AWS:
+                Fn::If:
+                  - UseTrusterRoleArn
+                  - Ref: TrusterRoleArn
+                  - Fn::Sub: "arn:aws:iam::${TrusterAccountId}:root"
+            Condition:
+              StringEquals:
+                "sts:ExternalId":
+                  Ref: ExternalId
+      Policies:
+        - PolicyName: InfraTwinReadOnlyPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Resource: "*"
+                Action:
+                  - ec2:DescribeInstances
+                  - ec2:DescribeSecurityGroups
+                  - ec2:DescribeSubnets
+                  - ec2:DescribeVpcs
+                  - eks:DescribeCluster
+                  - eks:ListClusters
+                  - elasticloadbalancing:DescribeLoadBalancers
+                  - elasticloadbalancing:DescribeTargetGroups
+                  - elasticloadbalancing:DescribeTargetHealth
+                  - iam:GetPolicy
+                  - iam:GetPolicyVersion
+                  - iam:GetRolePolicy
+                  - iam:GetUserPolicy
+                  - iam:ListAttachedRolePolicies
+                  - iam:ListAttachedUserPolicies
+                  - iam:ListRolePolicies
+                  - iam:ListRoles
+                  - iam:ListUserPolicies
+                  - iam:ListUsers
+                  - rds:DescribeDBInstances
+                  - s3:GetBucketLocation
+                  - s3:ListAllMyBuckets
+                  - sts:GetCallerIdentity
+
+Outputs:
+  RoleArn:
+    Description: ARN of the created infra-twin read-only role. Register this with your infra-twin tenant.
+    Value:
+      Fn::GetAtt:
+        - InfraTwinReadOnlyRole
+        - Arn
+    Export:
+      Name:
+        Fn::Sub: "${AWS::StackName}-RoleArn"

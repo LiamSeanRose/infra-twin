@@ -1,0 +1,9 @@
+# Staging environment non-secret variable placeholders.
+# Copy this file to terraform.tfvars, fill in values, and DO NOT commit terraform.tfvars.
+# Secret values (DB password, etc.) are never stored in tfvars — use the secret ARN only.
+
+region               = "us-east-1"
+db_username          = "infra_twin_app"
+db_password_secret_arn = "arn:aws:secretsmanager:us-east-1:000000000000:secret:infra-twin-staging-db-PLACEHOLDER"
+api_image            = "000000000000.dkr.ecr.us-east-1.amazonaws.com/infra-twin-api"
+api_image_tag        = "REPLACED_AT_DEPLOY"

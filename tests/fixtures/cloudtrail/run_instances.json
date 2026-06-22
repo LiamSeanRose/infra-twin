@@ -1,0 +1,36 @@
+{
+  "eventName": "RunInstances",
+  "eventID": "evt-run-001",
+  "eventTime": "2024-03-10T14:22:00Z",
+  "eventSource": "ec2.amazonaws.com",
+  "awsRegion": "us-east-1",
+  "requestParameters": {
+    "instanceType": "t3.micro",
+    "minCount": 1,
+    "maxCount": 1
+  },
+  "responseElements": {
+    "instancesSet": {
+      "items": [
+        {
+          "instanceId": "i-0abc123def456",
+          "instanceType": "t3.micro",
+          "subnetId": "subnet-0aaa1111",
+          "vpcId": "vpc-0bbb2222",
+          "currentState": {
+            "code": 0,
+            "name": "pending"
+          },
+          "groupSet": {
+            "items": [
+              {
+                "groupId": "sg-0ccc3333",
+                "groupName": "default"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
